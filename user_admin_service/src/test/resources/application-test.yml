@@ -1,0 +1,47 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: <emailid>
+    password: <password>
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/userdb?serverTimezone=UTC
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: admin
+  main:
+    web-application-type: servlet
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:sql/ddl/import_ddl_country.sql, classpath:sql/ddl/import_ddl_title.sql, classpath:sql/ddl/import_ddl_user_role.sql, classpath:sql/ddl/import_ddl_user_status.sql, classpath:sql/ddl/import_ddl_user.sql
+      data-locations: classpath:sql/dml/import_master_country.sql, classpath:sql/dml/import_master_title.sql, classpath:sql/dml/import_master_user_role.sql, classpath:sql/dml/import_master_user_status.sql, classpath:sql/dml/import_master_user.sql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+management:
+  endpoints:
+    web:
+      base-path: /status
+  server:
+    port: 8181
+server:
+  servlet:
+    context-path: 
+  port: 8010
+  max-http-header-size: 10000000
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expiry: 18000000
